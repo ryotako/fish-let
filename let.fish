@@ -5,6 +5,7 @@ function let --no-scope-shadowing
     end
 
     if not string match -qr '^\w+' -- "$argv"
+        echo "<let $argv[1]>"
         bash -c "let $argv[1]"
         return 1
     end
