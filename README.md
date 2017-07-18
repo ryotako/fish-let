@@ -14,7 +14,7 @@ fisher ryotako/fish-let
 
 ## Usage
 
-Use in the same way as let command for bash, but a variable named `argv` is not acceptable.
+Use in the same way as `let` command for bash, but a variable named `argv` is not acceptable.
 
 ```fish
 set -l foo 0
