@@ -1,21 +1,16 @@
 function let --no-scope-shadowing
-    if contains -- "$argv[1]" --help
-        bash -c 'help let'
+    if not string match -qr '^\w+' -- "$argv"
+        bash -c "let $argv[1]"
         return $status
     end
 
-    if not string match -qr '^\w+' -- "$argv"
-        echo "<let $argv[1]>"
-        bash -c "let $argv[1]"
-        return 1
-    end
-
-    #
-    # use no arguments except for argv
-    #
-    set argv (string match -r '(\w+)(.*)' -- "$argv")
-
-    if set -q "$argv[2]"
-        set $argv[2] (bash -c "a=$$argv[2]; let a$argv[3]; echo \$a")
+    if string match -qr '^argv\W' -- "$argv" # argv
+        set -l expr (string match -r '(\w+)(.*)' -- "$argv")
+        set -e argv
+        set argv (bash -c "v=$$expr[2]; let v$expr[3]; echo \$v")
+    else # other variables
+        set argv (string match -r '(\w+)(.*)' -- "$argv")
+        set $argv[2] (bash -c "v=$$argv[2]; let v$argv[3]; echo \$v")
     end
 end
+
