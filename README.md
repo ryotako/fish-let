@@ -3,7 +3,7 @@
 [![Build Status][travis-badge]][travis-link]
 [![Slack Room][slack-badge]][slack-link]
 
-Just a wrapper for bash's let command
+Just a wrapper for bash's `let` command
 
 ## Install
 
